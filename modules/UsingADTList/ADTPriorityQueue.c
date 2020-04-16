@@ -21,7 +21,6 @@ int* create_char(char a) {
 struct priority_queue {
 	List list;		// η λίστα στην οποία αποθηκεύουμε τα στοιχεία
 	CompareFunc compare;
-	// ...
 };
 
 // Συναρτήσεις του ADTPriorityQueue //////////////////////////////////////////////////
@@ -63,10 +62,13 @@ void pqueue_insert(PriorityQueue pqueue, Pointer value) {
 		return;
 	}
 	// Αλλιώς προστίθεται πριν το πρώτο (μεγαλύτερο) μικρότερό του
-	for (ListNode node = list_first(pqueue->list) ; node != LIST_EOF ; node = list_next(pqueue->list, node)) {
-		if (pqueue->compare(list_node_value(pqueue->list, list_next(pqueue->list, node)), value) < 0)
+	for (ListNode node = list_first(pqueue->list) ; list_next(pqueue->list, node) != LIST_EOF ; node = list_next(pqueue->list, node)) {
+		if (pqueue->compare(list_node_value(pqueue->list, list_next(pqueue->list, node)), value) < 0) {
 			list_insert_next(pqueue->list, node, value);
+			return;
+		}
 	}
+	list_insert_next(pqueue->list, list_last(pqueue->list), value);
 }
 
 void pqueue_remove_max(PriorityQueue pqueue) {

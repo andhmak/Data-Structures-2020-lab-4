@@ -10,13 +10,6 @@
 #include "ADTPriorityQueue.h"
 #include "ADTList.h"			// Η υλοποίηση του PriorityQueue χρησιμοποιεί List
 
-
-int* create_char(char a) {
-    int* p = malloc(sizeof(int));
-	*p = a;
-	return p;
-}
-
 // Ενα PriorityQueue είναι pointer σε αυτό το struct
 struct priority_queue {
 	List list;		// η λίστα στην οποία αποθηκεύουμε τα στοιχεία

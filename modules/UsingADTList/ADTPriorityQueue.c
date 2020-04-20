@@ -23,6 +23,8 @@ struct priority_queue {
 	CompareFunc compare;
 };
 
+// Η λίστα είναι ταξινομημένη σε φθίνουσα σειρά
+
 // Συναρτήσεις του ADTPriorityQueue //////////////////////////////////////////////////
 
 void pqueue_insert(PriorityQueue pqueue, Pointer value);
@@ -35,8 +37,9 @@ PriorityQueue pqueue_create(CompareFunc compare, DestroyFunc destroy_value, Vect
 	pqueue->list = list_create(destroy_value);
 	// Ένας dummy πρώτος κόμβος ώστε αν πρέπει να αλλάξει ο πραγματικός πρώτος κόμβος
 	// να γίνεται εύκολα (δεν έχω πρόσβαση στον dummy της υλοποίησης της λίστας)
-	list_insert_next(pqueue->list, LIST_BOF, create_char(0));
+	list_insert_next(pqueue->list, LIST_BOF, NULL);
 	pqueue->compare = compare;
+	// προσθήκη κάθε στοιχείου
 	if (values != NULL) {
 		for (uint i = 0 ; i < vector_size(values) ; i++) {
 			pqueue_insert(pqueue, vector_get_at(values, i));

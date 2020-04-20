@@ -96,7 +96,8 @@ static void heapify(PriorityQueue pqueue, Vector values) {
 		// Προσθέτουμε την τιμή στο τέλος το σωρού
 		vector_insert_last(pqueue->vector, vector_get_at(values, i));
 	}
-	for (int i = 1 ; i < size + 1; i++) {
+	// καλούμε την bubble_down για κάθε εσωτερικό κόμβος από κάτω προς την ρίζα
+	for (int i = vector_size(values)/2 ; i > 0; i--) {
 		bubble_down(pqueue, i);
 	}
 }
